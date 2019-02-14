@@ -1,0 +1,24 @@
+{
+  "name": "js-course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "debug": "node --inspect index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joytailor/node-js-course.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.4"
+  },
+  "bugs": {
+    "url": "https://github.com/joytailor/node-js-course/issues"
+  },
+  "homepage": "https://github.com/joytailor/node-js-course#readme"
+}
