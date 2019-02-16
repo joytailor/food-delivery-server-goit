@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const qs = require("querystring");
 
 const saveUser = user => {
   const userName = user.username;
@@ -17,23 +18,26 @@ const saveUser = user => {
 
 const signUpRoute = (request, response) => {
   if(request.method === "POST"){
-    let body = "";
+    let body = '';
 
     request.on("data", function(data){
       body += data;
+      console.log(data);
+
     });
 
     request.on("end", function() {
-      let user = JSON.parse(body);
+      let user = qs.parse(body);
       saveUser(user);
 
       const data = {status: "success", user: user};
       response.writeHead(200, {"Content-Type": "application/json"});
       response.write(JSON.stringify(data));
       response.end()
+      debugger
     });
   }
 
 }
-debugger
+
 module.exports = signUpRoute;
