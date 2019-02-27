@@ -13,7 +13,7 @@ const startServer = port => {
 
     const parsedUrl = url.parse(request.url);
 
-    const func = getRouteHandler(router, parsedUrl.pathname) || router.default;
+    const func = getRouteHandler(router, parsedUrl.path) || router.default;
 
     logger(request, response, () => func(request, response));
   });

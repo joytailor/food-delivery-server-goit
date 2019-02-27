@@ -5,6 +5,8 @@ const filterProducts = (arr, ids) => {
   return arr.filter(el => ids.includes(String(el.id)));
 }
 
+debugger
+
 const getQueryId = url => {
   const indexOf = url.query.indexOf("=");
 
@@ -34,8 +36,8 @@ const productsItemsByIdsRoute = (request, response) => {
       products: newArray
     };
 
-    res.write(JSON.stringify(responseBody));
-    res.end();
+    response.write(JSON.stringify(responseBody));
+    response.end();
   } else {
 
     const responseBody = {
@@ -43,8 +45,8 @@ const productsItemsByIdsRoute = (request, response) => {
       products: []
     };
 
-    res.write(JSON.stringify(responseBody));
-    res.end();
+    response.write(JSON.stringify(responseBody));
+    response.end();
   }
 }
 
