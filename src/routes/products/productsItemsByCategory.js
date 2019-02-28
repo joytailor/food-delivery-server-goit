@@ -1,20 +1,19 @@
 const allProducts = require("../../db/products/all-products.json");
 const url = require("url");
 
-const filterProducts = (arr, ids) => {
-  return arr.filter(el => ids.includes(String(el.id)));
+const filterProducts = (arr, category) => {
+  return arr.filter(el => el.categories.includes(String(category)));
 }
 
 debugger
 
-const getQueryId = url => {
+const getQueryCategory = url => {
   const indexOf = url.query.indexOf("=");
 
   if(indexOf !== -1){
-    const idString = url.query.slice(indexOf + 1).trim();
-    const arrOfIds = idString.split(",");
+    const categoryString = url.query.slice(indexOf + 1).trim();
 
-    return arrOfIds;
+    return categoryString;
   }
 
   return url;
@@ -22,8 +21,8 @@ const getQueryId = url => {
 
 const productsItemsByIdsRoute = (request, response) => {
   const parseUrl = url.parse(request.url);
-  const ids = getQueryId(parseUrl);
-  const filteredProducts = filterProducts(allProducts, ids);
+  const category = getQueryCategory(parseUrl);
+  const filteredProducts = filterProducts(allProducts, category);
 
   if(filteredProducts.length >= 1) {
     const newArray = filteredProducts.reduce((acc, el) => {

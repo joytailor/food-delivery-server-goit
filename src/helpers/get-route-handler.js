@@ -10,9 +10,7 @@ const getIdFreeUrl = url => {
     return url;
   }
 
-  const idNumber = +idString;
-
-  if (idNumber && lastIndex !== -1) {
+  if (idString && lastIndex !== -1) {
     return url.slice(0, lastIndex);
   }
   return url;
