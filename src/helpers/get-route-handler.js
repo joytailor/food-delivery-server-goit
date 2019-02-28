@@ -7,11 +7,11 @@ const getIdFreeUrl = url => {
   const queryString = url.slice(lastIndex +1).trim();
 
   // url example : `/users`
-  if (!hasNumber(queryString) && !isCategory(queryString)) {
+  if (!hasNumber(queryString) && !isCategory(url)) {
     return url;
   }
 
-  if (idString && lastIndex !== -1) {
+  if (queryString && lastIndex !== -1) {
     return url.slice(0, lastIndex);
   }
   return url;
