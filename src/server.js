@@ -1,15 +1,22 @@
-const http = require('http');
+const https = require('https');
+const fs = require('fs');
 const url = require('url');
-
+const path = require('path');
 const morgan = require('morgan');
 const router = require('./routes/router');
 const getRouteHandler = require('./helpers/get-route-handler');
-
 const logger = morgan('combined');
+
+const hostname = '127.0.0.1';
+
+const https_options = {
+  key: fs.readFileSync(path.join(__dirname, './sertificate/server.key')),
+  cert: fs.readFileSync(path.join(__dirname, './sertificate/server.crt'))
+};
 
 const startServer = port => {
 
-  const server = http.createServer((request, response) => {
+  const server = https.createServer(https_options, (request, response) => {
 
     const parsedUrl = url.parse(request.url);
 
@@ -19,6 +26,7 @@ const startServer = port => {
   });
 
   server.listen(port);
+  console.log(`Server running at https://${hostname}:${port}/`);
 };
 
 module.exports = startServer;
