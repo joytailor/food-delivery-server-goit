@@ -1,12 +1,17 @@
 const hasNumber = myString => /\d/.test(myString);
 const isCategory = string => string.match(/category/);
+const isSignUp = string => string.match(/sign-up/);
 
 const getIdFreeUrl = url => {
-  // url example : `/user/12345`
   const lastIndex = url.lastIndexOf('=');
   const queryString = url.slice(lastIndex +1).trim();
+  const indexOfQueryRequest = url.indexOf('?');
 
-  // url example : `/users`
+
+  if(isSignUp){
+    return url.slice(0, indexOfQueryRequest);
+  }
+
   if (!hasNumber(queryString) && !isCategory(url)) {
     return url;
   }

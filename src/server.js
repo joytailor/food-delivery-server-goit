@@ -7,8 +7,6 @@ const router = require('./routes/router');
 const getRouteHandler = require('./helpers/get-route-handler');
 const logger = morgan('combined');
 
-const hostname = '127.0.0.1';
-
 const https_options = {
   key: fs.readFileSync(path.join(__dirname, './sertificate/server.key')),
   cert: fs.readFileSync(path.join(__dirname, './sertificate/server.crt'))
@@ -26,7 +24,7 @@ const startServer = port => {
   });
 
   server.listen(port);
-  console.log(`Server running at https://${hostname}:${port}/`);
+  console.log(`Server running at https://localhost:${port}/`);
 };
 
 module.exports = startServer;
