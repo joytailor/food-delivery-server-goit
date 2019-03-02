@@ -1,30 +1,36 @@
-const https = require('https');
-const fs = require('fs');
-const url = require('url');
-const path = require('path');
+// const https = require('https');
+// const fs = require('fs');
+// const path = require('path');
 const morgan = require('morgan');
-const router = require('./routes/router');
-const getRouteHandler = require('./helpers/get-route-handler');
-const logger = morgan('combined');
+const express = require('express');
+const bodyParser = require("body-parser");
 
-const https_options = {
-  key: fs.readFileSync(path.join(__dirname, './sertificate/server.key')),
-  cert: fs.readFileSync(path.join(__dirname, './sertificate/server.crt'))
-};
+const router = require('./routes/router');
+const app = require('./modules/app');
+
+// const https_options = {
+//   key: fs.readFileSync(path.join(__dirname, './sertificate/server.key')),
+//   cert: fs.readFileSync(path.join(__dirname, './sertificate/server.crt'))
+// };
+
+const errorHandler = (req, res, next) => {
+  req.status(500, `Requested page doesn't exist.`);
+  next();
+}
 
 const startServer = port => {
 
-  const server = https.createServer(https_options, (request, response) => {
+    app
+      .use(bodyParser.urlencoded({extended: false}))
+      .use(bodyParser.json())
+      .use(morgan("dev"))
+      // .use(express.static(staticPath))
+      .use("/", router)
+      .use(errorHandler)
 
-    const parsedUrl = url.parse(request.url);
+  app.listen(port);
 
-    const func = getRouteHandler(router, parsedUrl.path) || router.default;
-
-    logger(request, response, () => func(request, response));
-  });
-
-  server.listen(port);
-  console.log(`Server running at https://localhost:${port}/`);
+  console.log(`Server running at http://localhost:${port}/`);
 };
 
 module.exports = startServer;

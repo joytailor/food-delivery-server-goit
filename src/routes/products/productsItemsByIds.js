@@ -5,8 +5,6 @@ const filterProducts = (arr, ids) => {
   return arr.filter(el => ids.includes(String(el.id)));
 }
 
-debugger
-
 const getQueryId = url => {
   const indexOf = url.query.indexOf("=");
 
