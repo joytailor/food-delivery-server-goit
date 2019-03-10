@@ -13,7 +13,8 @@ const apiRoutes = express.Router();
 
 const userMiddleware = (req, res, next) => {
   if(req.body.userName){
-    next();
+    console.log('User saved successfully');
+    next(createUserRoute);
     return
   }
   res.status(400);
