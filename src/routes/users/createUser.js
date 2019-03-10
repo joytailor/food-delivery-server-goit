@@ -22,7 +22,7 @@ const createUser = ( request, response) => {
   const sendError = () => {
     response.status(400);
     response.json({
-      error: 'user has not been save'
+      error: 'user has not been saved'
     });
   };
   debugger
