@@ -4,7 +4,7 @@ const getProductsRoute = require('./products/products');
 const getProductsItemById = require('./products/productItemById');
 const getProductsItemsByIdsRoute = require('./products/productsItemsByIds');
 const getProductsItemsByCategoryRoute = require('./products/productsItemsByCategory');
-const signUpRoute = require('./users/signUp');
+const createUserRoute = require('./users/createUser');
 const getUserById = require('./users/getUserById');
 const sendOrderRoute = require('./users/sendOrderRoute');
 const postImageRoute = require('./images/postImageRoute');
@@ -30,7 +30,7 @@ apiRoutes
   .get('/products/?category', getProductsItemsByCategoryRoute)
   .get('/users/:id', getUserById)
 
-  .post('/sign-up', userMiddleware, signUpRoute)
+  .post('/create-user', userMiddleware, createUserRoute)
   .post('/orders', sendOrderRoute)
   .post('/images', postImageRoute)
 

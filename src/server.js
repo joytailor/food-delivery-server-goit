@@ -13,9 +13,10 @@ const app = require('./modules/app');
 //   cert: fs.readFileSync(path.join(__dirname, './sertificate/server.crt'))
 // };
 
-const errorHandler = (req, res, next) => {
-  req.status(500, `Requested page doesn't exist.`);
-  next();
+const errorHandler = (req, res, err) => {
+  console.error(err.stack);
+
+  res.json(500).send('Something broke!');
 }
 
 const startServer = port => {
