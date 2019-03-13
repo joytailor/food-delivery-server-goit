@@ -19,10 +19,11 @@ const createUser = ( request, response) => {
     });
   };
 
-  const sendError = () => {
+  const sendError = (err) => {
     response.status(400);
     response.json({
-      error: 'user has not been saved'
+      error: 'user has not been saved',
+      errorType: err.stack
     });
   };
   debugger

@@ -1,22 +1,23 @@
 const User = require('./../../modules/db/shemas/userShema');
 
-const getUserByIdRoute = (request, response) => {
-
+const getUser = (request, response) => {
   const id = request.params.id;
-  
+
   const sendResponse = (user) => {
     response.status(200);
-    response.json(user);
+    response.json({
+      status: 'User is successfully deleted',
+      userInfo: user
+    });
   };
 
-  const findUser = User.findById(id);
-
-  findUser
+  User
+    .findById(id)
+    .remove()
     .then(sendResponse)
     .catch(error => {
       console.error(error);
     });
+};
 
-}
-
-module.exports = getUserByIdRoute;
+module.exports = getUser;
