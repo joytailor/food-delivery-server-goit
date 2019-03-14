@@ -14,14 +14,17 @@ const app = require('./modules/app');
 // };
 
 const errorHandler = (req, res, next) => {
-  req.status(500, `Requested page doesn't exist.`);
+  res.status(404);
+  res.json({
+    status: `Requested page doesn't exist`
+  })
   next();
 }
 
 const startServer = port => {
 
     app
-      .use(bodyParser.urlencoded({extended: false}))
+      .use(bodyParser.urlencoded({ extended: false }))
       .use(bodyParser.json())
       .use(morgan("dev"))
       // .use(express.static(staticPath))
