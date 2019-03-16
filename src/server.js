@@ -14,9 +14,8 @@ const app = require('./modules/app');
 // };
 
 const errorHandler = (req, res, err) => {
-  console.error(err.stack);
-
-  res.json(500);
+  res.status(500);
+  res.json(err.stack);
 }
 
 const startServer = port => {

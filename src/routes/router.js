@@ -1,16 +1,21 @@
 const express = require('express');
+
 const main = require('./main/main');
-const getProducts = require('./products/products');
-const getProductsItemById = require('./products/productItemById');
-const getProductsItemsByIds = require('./products/productsItemsByIds');
-const getProductsItemsByCategory = require('./products/productsItemsByCategory');
+const getProducts = require('./products/getAllProducts');
+const getProductsItemById = require('./products/getProductItemById');
+const getProductsItemsByIds = require('./products/getProductsItemsByIds');
+const getProductsItemsByCategory = require('./products/getProductsItemsByCategory');
+const sendProduct = require('./products/postProduct');
+const updateProduct = require('./products/updateProduct');
 
 const createUser = require('./users/createUser');
 const getAllUsers = require('./users/getAllUsers');
 const getUserById = require('./users/getUserById');
 const updateUser = require('./users/updateUser');
 const deleteUser = require('./users/deleteUser');
-const sendOrder = require('./users/sendOrderRoute');
+
+const sendOrder = require('./orders/sendOrderRoute');
+const getOrderById = require('./orders/getOrderById');
 
 const postImage = require('./images/postImageRoute');
 
@@ -34,13 +39,17 @@ apiRoutes
   .get('/products/:id', getProductsItemById)
   .get('/products/?ids', getProductsItemsByIds)
   .get('/products/?category', getProductsItemsByCategory)
+  .post('/products', sendProduct)
+  .post('/products/:id', updateProduct)
 
   .get('/users/:id', getUserById)
   .get('/users', getAllUsers)
   .post('/users/:id', updateUser)
   .post('/create-user', userMiddleware, createUser)
   .delete('/delete-user', deleteUser)
+
   .post('/orders', sendOrder)
+  .get('/orders/:id', getOrderById)
 
   .post('/images', postImage)
 

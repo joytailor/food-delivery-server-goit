@@ -28,7 +28,7 @@ const updateUser = (request, response) => {
   User
     .findOneAndUpdate(
       { _id: id },
-      { $push: propertyToUpdate },
+      { $addToSet: propertyToUpdate },
       { new: true }
     )
     .then(sendResponse)

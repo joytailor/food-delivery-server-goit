@@ -1,7 +1,7 @@
 const User = require('../../modules/db/shemas/userShema');
 const bcrypt = require('bcrypt');
 
-const createUser = ( request, response) => {
+const createUser = (request, response) => {
   const user = request.body;
 
   const hashedPassword = bcrypt.hashSync(user.password, 10);
@@ -26,7 +26,6 @@ const createUser = ( request, response) => {
       errorType: err.stack
     });
   };
-  debugger
 
   newUser.save()
   .then(sendResponse)
